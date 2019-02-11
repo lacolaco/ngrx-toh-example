@@ -1,7 +1,10 @@
+import { getAllHeroes } from './../hero/hero.selectors';
 import { Component, OnInit } from '@angular/core';
 
 import { Hero } from '../hero';
 import { HeroService } from '../hero.service';
+import { Observable } from 'rxjs';
+import { Store, select } from '@ngrx/store';
 
 @Component({
   selector: 'app-heroes',
@@ -9,31 +12,29 @@ import { HeroService } from '../hero.service';
   styleUrls: ['./heroes.component.css']
 })
 export class HeroesComponent implements OnInit {
-  heroes: Hero[];
+  heroes$: Observable<Hero[]>;
 
-  constructor(private heroService: HeroService) { }
+  constructor(private heroService: HeroService, private store: Store<{}>) {
+    this.heroes$ = this.store.pipe(select(getAllHeroes));
+  }
 
   ngOnInit() {
-    this.getHeroes();
+    this.initialize();
   }
 
-  getHeroes(): void {
-    this.heroService.getHeroes()
-    .subscribe(heroes => this.heroes = heroes);
+  initialize(): void {
+    this.heroService.fetchHeroes();
   }
 
-  add(name: string): void {
+  add(name: string) {
     name = name.trim();
-    if (!name) { return; }
-    this.heroService.addHero({ name } as Hero)
-      .subscribe(hero => {
-        this.heroes.push(hero);
-      });
+    if (!name) {
+      return;
+    }
+    this.heroService.addHero({ name } as Hero);
   }
 
   delete(hero: Hero): void {
-    this.heroes = this.heroes.filter(h => h !== hero);
-    this.heroService.deleteHero(hero).subscribe();
+    this.heroService.deleteHero(hero);
   }
-
 }
