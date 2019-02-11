@@ -1,20 +1,18 @@
-import {
-  SetHeros,
-  AddHero,
-  DeleteHero,
-  SetSearchedHeroes,
-  SelectHero,
-  UpdateHero
-} from './hero.actions';
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
+import { Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
-
-import { Hero } from '../models/hero';
 import { MessageService } from '../message.service';
-import { Store } from '@ngrx/store';
+import { Hero } from '../models/hero';
+import {
+  AddHero,
+  DeleteHero,
+  SelectHero,
+  SetHeros,
+  SetSearchedHeroes,
+  UpdateHero
+} from './hero.actions';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -117,7 +115,7 @@ export class HeroService {
   async updateHero(hero: Hero) {
     try {
       const updated = await this.http
-        .put<Hero>(this.heroesUrl, hero, httpOptions)
+        .put<Hero>(`${this.heroesUrl}/${hero.id}`, hero, httpOptions)
         .toPromise();
       this.log(`updated hero id=${hero.id}`);
       this.store.dispatch(new UpdateHero(updated));
