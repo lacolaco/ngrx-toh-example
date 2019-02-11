@@ -2,7 +2,9 @@ import {
   SetHeros,
   AddHero,
   DeleteHero,
-  SetSearchedHeroes
+  SetSearchedHeroes,
+  SelectHero,
+  UpdateHero
 } from './hero/hero.actions';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -53,12 +55,16 @@ export class HeroService {
   }
 
   /** IDによりヒーローを取得する。見つからなかった場合は404を返却する。 */
-  getHero(id: number): Observable<Hero> {
+  async getHero(id: number) {
     const url = `${this.heroesUrl}/${id}`;
-    return this.http.get<Hero>(url).pipe(
-      tap(_ => this.log(`fetched hero id=${id}`)),
-      catchError(this.handleError<Hero>(`getHero id=${id}`))
-    );
+    try {
+      this.store.dispatch(new SelectHero(null));
+      const hero = await this.http.get<Hero>(url).toPromise();
+      this.log(`fetched hero id=${id}`);
+      this.store.dispatch(new SelectHero(hero));
+    } catch {
+      this.handleError<Hero>(`getHero id=${id}`);
+    }
   }
 
   /* 検索語を含むヒーローを取得する */
@@ -108,11 +114,16 @@ export class HeroService {
   }
 
   /** PUT: サーバー上でヒーローを更新 */
-  updateHero(hero: Hero): Observable<any> {
-    return this.http.put(this.heroesUrl, hero, httpOptions).pipe(
-      tap(_ => this.log(`updated hero id=${hero.id}`)),
-      catchError(this.handleError<any>('updateHero'))
-    );
+  async updateHero(hero: Hero) {
+    try {
+      const updated = await this.http
+        .put<Hero>(this.heroesUrl, hero, httpOptions)
+        .toPromise();
+      this.log(`updated hero id=${hero.id}`);
+      this.store.dispatch(new UpdateHero(updated));
+    } catch {
+      this.handleError<any>('updateHero');
+    }
   }
 
   /**

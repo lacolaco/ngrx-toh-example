@@ -3,20 +3,16 @@ import { Hero } from '../hero';
 
 export enum HeroActionTypes {
   SetHeroes = '[Hero] Set Heros',
-  SelectHero = '[Hero] Select Hero',
   AddHero = '[Hero] Add Hero',
   DeleteHero = '[Hero] Delete Hero',
-  SetSearchedHeroes = '[Hero] Set Searched Heros'
+  UpdateHero = '[Hero] Update Hero',
+  SetSearchedHeroes = '[Hero] Set Searched Heros',
+  SelectHero = '[Hero] Select Hero'
 }
 
 export class SetHeros implements Action {
   readonly type = HeroActionTypes.SetHeroes;
   constructor(readonly payload: Hero[]) {}
-}
-
-export class SelectHero implements Action {
-  readonly type = HeroActionTypes.SelectHero;
-  constructor(readonly payload: Hero) {}
 }
 
 export class AddHero implements Action {
@@ -29,14 +25,25 @@ export class DeleteHero implements Action {
   constructor(readonly payload: number) {}
 }
 
+export class UpdateHero implements Action {
+  readonly type = HeroActionTypes.UpdateHero;
+  constructor(readonly payload: Hero) {}
+}
+
 export class SetSearchedHeroes implements Action {
   readonly type = HeroActionTypes.SetSearchedHeroes;
   constructor(readonly payload: Hero[]) {}
 }
 
+export class SelectHero implements Action {
+  readonly type = HeroActionTypes.SelectHero;
+  constructor(readonly payload: Hero) {}
+}
+
 export type HeroActions =
   | SetHeros
-  | SelectHero
   | AddHero
   | DeleteHero
-  | SetSearchedHeroes;
+  | UpdateHero
+  | SetSearchedHeroes
+  | SelectHero;

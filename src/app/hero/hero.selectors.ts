@@ -17,3 +17,8 @@ export const getSelectedHeroes = createSelector(
   selectHeroFeature,
   hero => hero.searchedHeroes
 );
+
+export const getSelectedHero = createSelector(
+  selectHeroFeature,
+  hero => hero.selectedHero
+);
