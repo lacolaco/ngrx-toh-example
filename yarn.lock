@@ -324,6 +324,21 @@
     lodash "^4.17.10"
     to-fast-properties "^2.0.0"
 
+"@ngrx/router-store@^7.2.0":
+  version "7.2.0"
+  resolved "https://registry.yarnpkg.com/@ngrx/router-store/-/router-store-7.2.0.tgz#81538a259c5befb137efa47b4c5750e508e7a7d0"
+  integrity sha512-deXDZg4FffuqxlFXqAaR8+lEy4yCJgTmKn2avKHltF3GP+8bxIRiD6GDCYjYJVhLFiBK8U3AFhgfoEuUUpFCag==
+
+"@ngrx/schematics@^7.2.0":
+  version "7.2.0"
+  resolved "https://registry.yarnpkg.com/@ngrx/schematics/-/schematics-7.2.0.tgz#2802a6f7533904967416de09c306e4149f58d1e6"
+  integrity sha512-BG1Sg3bWjrJBmwbCgmrjmaeWwqOHcQsZeavWx1oCkrrSR+7u2h6mwzIFiVZUqhs8DQw5THr91pe6rtpHKcQ6Yw==
+
+"@ngrx/store@^7.2.0":
+  version "7.2.0"
+  resolved "https://registry.yarnpkg.com/@ngrx/store/-/store-7.2.0.tgz#b22200fd48b721afe0e5cc9eec92f3dc31c078b1"
+  integrity sha512-E9c0cDot0HeE0mXyeqw18SwmJ2+eKnA5mMMfwvoskpMInCYGI2pq1i6/lCVQ2wrEHSH+KvObK4PQbepcA9vP+w==
+
 "@ngtools/webpack@7.0.7":
   version "7.0.7"
   resolved "https://registry.yarnpkg.com/@ngtools/webpack/-/webpack-7.0.7.tgz#0cd933534a878f25f69448435302c82a861096a6"
@@ -4778,6 +4793,11 @@ neo-async@^2.5.0:
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.0.tgz#b9d15e4d71c6762908654b5183ed38b753340835"
   integrity sha512-MFh0d/Wa7vkKO3Y3LlacqAEeHK0mckVqzDieUKTT+KGxi+zIpeVsFxymkIiRpbpDziHc290Xr9A1O4Om7otoRA==
+
+ng@^0.0.0:
+  version "0.0.0"
+  resolved "https://registry.yarnpkg.com/ng/-/ng-0.0.0.tgz#1ab91a42699d5fcc8d3b674006027fd3006ec551"
+  integrity sha512-HwR40IBJa1ZU+CIGyuy7vSCN3xFYlSRfw5eIwwKOdOMNNNIl8KhT6PXKmHuFEFYpfrbOMaCYtr4QOJ3gkkubcg==
 
 nice-try@^1.0.4:
   version "1.0.5"
