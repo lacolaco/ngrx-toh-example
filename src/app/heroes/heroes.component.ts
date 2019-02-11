@@ -1,8 +1,8 @@
 import { getAllHeroes } from './../hero/hero.selectors';
 import { Component, OnInit } from '@angular/core';
 
-import { Hero } from '../hero';
-import { HeroService } from '../hero.service';
+import { Hero } from '../models/hero';
+import { HeroService } from '../hero/hero.service';
 import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 

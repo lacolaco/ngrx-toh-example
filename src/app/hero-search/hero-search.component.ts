@@ -10,8 +10,8 @@ import {
   tap
 } from 'rxjs/operators';
 
-import { Hero } from '../hero';
-import { HeroService } from '../hero.service';
+import { Hero } from '../models/hero';
+import { HeroService } from '../hero/hero.service';
 import { Store, select } from '@ngrx/store';
 import { getSelectedHeroes } from '../hero/hero.selectors';
 

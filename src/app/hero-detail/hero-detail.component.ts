@@ -2,8 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
-import { Hero } from '../hero';
-import { HeroService } from '../hero.service';
+import { Hero } from '../models/hero';
+import { HeroService } from '../hero/hero.service';
 import { Store, select } from '@ngrx/store';
 import { getSelectedHero } from '../hero/hero.selectors';
 import { Observable } from 'rxjs';
