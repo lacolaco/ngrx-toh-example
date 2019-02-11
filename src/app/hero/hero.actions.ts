@@ -5,7 +5,8 @@ export enum HeroActionTypes {
   SetHeroes = '[Hero] Set Heros',
   SelectHero = '[Hero] Select Hero',
   AddHero = '[Hero] Add Hero',
-  DeleteHero = '[Hero] Delete Hero'
+  DeleteHero = '[Hero] Delete Hero',
+  SetSearchedHeroes = '[Hero] Set Searched Heros'
 }
 
 export class SetHeros implements Action {
@@ -28,4 +29,14 @@ export class DeleteHero implements Action {
   constructor(readonly payload: number) {}
 }
 
-export type HeroActions = SetHeros | SelectHero | AddHero | DeleteHero;
+export class SetSearchedHeroes implements Action {
+  readonly type = HeroActionTypes.SetSearchedHeroes;
+  constructor(readonly payload: Hero[]) {}
+}
+
+export type HeroActions =
+  | SetHeros
+  | SelectHero
+  | AddHero
+  | DeleteHero
+  | SetSearchedHeroes;

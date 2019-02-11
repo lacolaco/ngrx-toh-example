@@ -1,4 +1,9 @@
-import { SetHeros, AddHero, DeleteHero } from './hero/hero.actions';
+import {
+  SetHeros,
+  AddHero,
+  DeleteHero,
+  SetSearchedHeroes
+} from './hero/hero.actions';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
@@ -57,15 +62,20 @@ export class HeroService {
   }
 
   /* 検索語を含むヒーローを取得する */
-  searchHeroes(term: string): Observable<Hero[]> {
+  async searchHeroes(term: string) {
     if (!term.trim()) {
       // 検索語がない場合、空のヒーロー配列を返す
       return of([]);
     }
-    return this.http.get<Hero[]>(`${this.heroesUrl}/?name=${term}`).pipe(
-      tap(_ => this.log(`found heroes matching "${term}"`)),
-      catchError(this.handleError<Hero[]>('searchHeroes', []))
-    );
+    try {
+      const heroes = await this.http
+        .get<Hero[]>(`${this.heroesUrl}/?name=${term}`)
+        .toPromise();
+      this.log(`found heroes matching "${term}"`);
+      this.store.dispatch(new SetSearchedHeroes(heroes));
+    } catch {
+      this.handleError<Hero[]>('searchHeroes', []);
+    }
   }
 
   //////// Save methods //////////
